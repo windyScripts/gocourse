@@ -1,0 +1,45 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func main() {
+	var a,b int = 10,3
+	var result int
+	result = a + b
+
+	fmt.Println("addition", result)
+
+	result = a/b
+	fmt.Println("division", result)
+
+	const p float64 = 22/7.0
+	fmt.Println(p)
+
+	var maxInt int64 = 9223372036854775807
+	fmt.Println(maxInt)
+
+	// signed
+	maxInt = maxInt + 1
+	fmt.Println(maxInt) // overflow causes negative value.
+
+	// unsigned
+	var uMaxInt uint64 = 18446744073709551615
+	uMaxInt = uMaxInt + 1
+	fmt.Println(uMaxInt) // overflow causes zero.
+
+	var smallFloat float64 = 1.0e-323
+	fmt.Println(smallFloat)
+	smallFloat = smallFloat/ math.MaxFloat64
+	fmt.Println(smallFloat) // underflow. 
+	// smallest float number is 
+	// divided by extremely large number, 
+	// precision cannot be preserved. Causes 0.
+
+
+	
+
+
+}

@@ -1,0 +1,19 @@
+package main
+
+//middleName := "Cane" //throws error expected declaration, found middleName
+var middleName = "Cane" // global scope.
+
+func main() {
+	var age int
+	var name string = "John"
+	var name2 = "Jane" // no type when assignment immediate.
+
+	count := 10
+	lastName := "smith" // no var, no type. 
+	//can't user var with gopher symbol.
+
+// := 
+
+
+
+}

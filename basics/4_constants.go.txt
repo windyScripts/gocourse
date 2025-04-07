@@ -1,0 +1,12 @@
+package main
+
+func main() {
+	const PI = 3.14 // require const declaration
+	const count int = 5
+	const (
+		thursday = 4
+		name = "friday"
+	)
+	// no short declarations for constants.
+
+}

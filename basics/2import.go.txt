@@ -1,0 +1,19 @@
+package main
+
+import (
+	"fmt"                      // double quotes, different lines, no commas.
+	placeholderName "net/http" // alias
+)
+
+func main(){
+	fmt.Println("Hello, go standard library")
+
+	resp, err := placeholderName.Get("https://jsonplaceholder.typicode.com/posts/1")
+	if err != nil {
+		fmt.Println("Error: ",err);
+		return
+	}
+	defer resp.Body.Close()
+
+	fmt.Println("HTTP Response Status ", resp.Status)
+}

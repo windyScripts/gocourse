@@ -1,0 +1,13 @@
+package main //like index, is required to be named main.
+
+import "fmt" // formatted input and output
+
+func main() { // entrypoint of all go programs. Must be named main.
+	fmt.Println("Hello world!")
+}
+
+// go run hello.go to run. Dev and testing phases.
+// go build hello.go to create binary for prod.
+// ./hello to run the binary
+
+
