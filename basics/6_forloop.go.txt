@@ -1,0 +1,50 @@
+package main
+
+import "fmt"
+
+func main(){
+	for i:=0; i<=5; i++ {
+		fmt.Println(i)
+	}
+
+	// iterate over collection
+
+	numbers := []int{1,2,3,4,5,6}
+	for index, value := range numbers {
+		fmt.Printf("Index: %d, Value: %d", index, value)
+	} // placeholders require use of Printf, not Println
+	// %v is general value, %d is for numbers
+
+	for i:=1; i<=10; i++ {
+		if i%2 == 0 {
+			continue
+		}
+		fmt.Println("Odd Number: ",i)
+		if(i == 5) {
+			break
+		}
+	}
+
+	rows:= 5
+
+	// asterisk layout
+	// Outer loop
+	for i:=1; i<=rows; i++ {
+		// inner loop
+		for j:=1; j <=rows - i; j++ {
+			fmt.Print(" ")
+		}
+		for k:=1; k <= 2*i-1; k++ {
+			fmt.Print("*") // Print without moving to next line.
+		}
+		fmt.Println() // Move to next line.
+	}
+
+	for i := range 10 {
+		fmt.Println(10-i)
+	}
+	fmt.Println("We have liftoff!")
+
+	
+
+}

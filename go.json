@@ -1,0 +1,7 @@
+{
+  "Print Package Main Func Main": {
+    "prefix": "pmfm",
+    "body": ["Package main", "", "", "func main(){", "", "", "}"],
+    "description": "Creates a basic boilerplate for Go program"
+  }
+}
