@@ -1,0 +1,14 @@
+package main
+
+func main(){
+	switch expression {
+	case value1:
+		// code to be executed.
+	case value2:
+		// code to be executed.
+	default:
+		// default code to execute.
+	}
+}
+
+// no need for break.

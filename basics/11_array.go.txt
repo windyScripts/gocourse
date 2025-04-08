@@ -1,0 +1,54 @@
+package main
+
+import "fmt"
+
+func main(){
+	var numbers [5]int // array of five zeroes.
+	fmt.Println(numbers)
+
+	// index 0 to len(numbers)-1.
+
+	numbers[4] = 20
+	fmt.Println(numbers)
+
+	fruits := [4]string{"Apple","banana","orange","grape"}
+	fmt.Println(fruits)
+
+	for index, value := range numbers {
+		fmt.Printf("index %d value %d", index, value)
+	} // generally prefer i,v
+
+	// _ is a blank identifier, if we do not want to use a value.
+	// return types are defined in a second set of brackets.
+	// so function (arguments)(returns){...}
+
+	// Note that we can't do for a := ..., we have to add both 
+	// values, the second being _.
+
+	array1 := [3]int{1,2,3}
+	array2 := [3]int{1,2,3}
+
+	fmt.Println("Array1 equals 2", array1 == array2) // true
+
+	var matrix [3][3]int = [3][3]int{
+		{1,2,3},
+		{4,5,6},
+		{7,8,9},
+	}
+
+	fmt.Println(matrix)
+
+	originalArray := [3]int{1,2,3}
+	var copiedArray *[3]int // reference holder.
+
+	copiedArray = &originalArray; //reference now.
+	copiedArray[2] = 100
+
+	fmt.Println(originalArray) // 1,2,100
+
+/// arrays do not share reference. So a copy can be 
+// changed without modifying the original.
+
+// length is len(numbers)
+// array lengths are static. for dynamic, use slices.
+}
