@@ -1,0 +1,19 @@
+package main
+
+import "fmt"
+
+func main() {
+	// a function enclosed in another function that 
+	// only runs once the surrounding function has run.
+	// defer statements are lifo
+	// arguments are evaluated immediately on being read. 
+	// So if arguments change later, those changes are not stored.
+	process()
+}
+
+func process(){
+	defer fmt.Println("Defer statement 1 exec")
+	defer fmt.Println("Defer statement 2 exec")
+	defer fmt.Println("Defer statement 3 exec")
+	fmt.Println("Process exec")
+}

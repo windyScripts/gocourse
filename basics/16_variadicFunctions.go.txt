@@ -1,0 +1,24 @@
+package main
+
+// import "errors"
+import "fmt"
+
+func main() {
+	// last argument has an ellipsis ...
+	// func funcName(param1 type1, param2 type2, param3 ...type3) returnType{}
+
+	fmt.Println(sum(1,2,3))
+
+	numbers := []int{1,2,3,4,5,6}
+
+	fmt.Println(sum(numbers...)) // prints sum of values
+
+}
+
+func sum(nums ...int) int{
+		total:=0
+		for _, v:= range nums{
+			total+= v
+		}
+		return total
+}

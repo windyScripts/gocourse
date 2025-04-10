@@ -1,0 +1,82 @@
+package main
+
+import (
+	"fmt"
+	"maps"
+)
+
+func main() {
+	// associate keys with values, maps do.
+	// maps are unordered.
+
+	//var mapVariable map[keyType]valueType
+	// mapVariable = make(map[keyType]valueType)
+
+	// Map literal:
+	// mapVariable = map[Keytype]ValueType{
+	//key1: value1
+	//key2: value2
+	//}
+
+	myMap := make(map[string]int)
+	myMap["key1"] = 9;
+	myMap["code"] = 10;
+
+	fmt.Println(myMap)
+
+	// for non existent key, zero value is returned.
+	fmt.Println(myMap["key"])
+
+	// delete pair:
+	delete(myMap, "key1")
+	fmt.Println(myMap)
+
+	// erase all values
+	//clear(myMap)
+	//fmt.Println(myMap)
+
+	v, unknownValue := myMap["key1"]
+	fmt.Println(v, unknownValue)
+	// unknown value is true or false based
+	// on whether there is a value associated with the given key.
+	// this value is usually marked as a variable ok.
+
+	myMap2 := map[string]int{"a":1,"b":2}
+	fmt.Println(myMap2)
+
+	if maps.Equal(myMap,myMap2){
+		fmt.Println("They are equal")
+	}
+
+	for k, v := range myMap2 {
+		fmt.Println(k,v)
+	}
+
+	// zero value of map is nil.
+	
+	var myMap4 map[string]string
+	if myMap4 == nil {
+		fmt.Println("Nil")
+	}
+
+	val := myMap4["key"]
+	fmt.Println(val) // '', zero of string.
+
+	myMap4["key"] = "value"
+	fmt.Println(myMap4)
+
+	myMap4 = make(map[string]string)
+	myMap4["key"] = "value"
+	fmt.Println(myMap4)
+
+	fmt.Println("myMap length", len(myMap4))
+
+	// nested maps
+
+	myMap5 := make(map[string]map[string]string)
+	myMap5["map1"] = myMap4
+	fmt.Println(myMap5)
+
+	// make is necessary to add values.
+
+}

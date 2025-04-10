@@ -1,0 +1,69 @@
+package main
+
+import (
+	"fmt"
+	"slices"
+)
+
+func main(){
+	//var sliceName[]ElementType
+	var numbers []int //slice
+	var numbers1 = []int{1,2,3}
+	numbers2 := []int{9,8}
+
+	fmt.Println(numbers,numbers1,numbers2)
+
+	// can grow and shrink dynamically, cap function to check 
+	// capacity, number of underlying elements in array
+	//slice := make([]int,5)
+	a := [5]int{1,2,3,4,5}
+	slice1 := a[1:4] // slice from index 1 to 4 of a. 2,3,4
+	fmt.Println(slice1)
+
+	slice1 = append(slice1, 6,7)
+	sliceCopy := make([]int, len(slice1)) // length of slice1 is given to new slice.
+
+copy(sliceCopy,slice1)
+
+fmt.Println(sliceCopy)
+
+//var nilSlice []int // empty slice declaration.
+
+for i, v := range slice1 {
+	fmt.Println(i,v)
+}
+
+fmt.Println(slice1[3]) // element at index 3, or 4th element.
+// can modify values.
+
+slice1[3] = 50 // if active, the following if block does not run.
+
+if slices.Equal(slice1, sliceCopy){
+	fmt.Println("Slice1 is equal to sliceCopy.")
+}
+
+// two dimensional slice:
+
+twoD := make([][]int,3)
+
+for i:=0; i<3; i++ {
+innerLen := i + 1
+twoD[i] = make([]int, innerLen)
+for j:=0; j<innerLen; j++ {
+	twoD[i][j] = i + j
+}
+}
+
+fmt.Println(twoD, "twoD")
+
+slice2 := slice1[2:4]
+fmt.Println(slice2)
+
+fmt.Println("the capacity of slice2 is", cap(slice2))
+fmt.Println("the length of slice2 is", len(slice2))
+
+// capacity is 6 since the underlying array has a size of 6.
+
+
+
+}

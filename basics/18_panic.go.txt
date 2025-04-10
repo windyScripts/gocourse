@@ -1,0 +1,21 @@
+package main
+
+import "fmt"
+
+func main() {
+
+	// panic(interface()) // interface is like any.
+	process(-1)
+}
+
+func process(input int){
+	defer fmt.Println("Before panic")
+	if(input < 0) {
+		panic("input must be non negative.")
+		// any statements after will nopt be executed, 
+		// we leave the function immediately.
+	}
+	fmt.Println("positive number",input)
+
+	// panic runs after all defers
+}

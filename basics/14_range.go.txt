@@ -1,0 +1,20 @@
+package main
+
+import "fmt"
+
+func main() {
+	message := "Hello World"
+
+	for i, v := range message {
+		//fmt.Println(i,v) // index and ascii code.
+		fmt.Printf("Index: %d Rune:%c\n",i,v)
+	}
+
+	// Range iterates over a copy, so changing 
+	// inside loop will not affect the original value.
+	// arrays, slices and strings, from first to last.
+	// map, unspecified order
+	// channel, until it closes.
+
+	
+}
