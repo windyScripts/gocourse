@@ -1,0 +1,38 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main () {
+	// strings can be created with double
+	// quotes or backticks. Backticks are raw strings.
+	// \n \t \r
+	// \r goes to first position and replaces string.
+	// strings can use len.
+	// indexes covered.
+	// concatenation does not create a space
+	// between strings.
+	// Only happens in print statement.
+	// comparisons:
+	// < > <= >= is lexicographical ordering based.
+	// ascii comparison underneath.
+	// for i, char := range variable
+	// goes over strings.
+	// %d, %c are format verbs.
+	// RuneCountInString() counts runes, len counts bytes.
+	// strings are immutable, you can't add to an existing string.
+	// single quotes are characters.
+
+	var ch rune = 'a'; // ascii of char
+	// unicode chars from languages is supported, like japanese.
+	// string conversion through string()
+	var chr string= string(123)
+	fmt.Println(chr, ch);
+	fmt.Printf("Type of chr is %T",chr)
+	// %T is type of variables.
+	// new line to avoid % sign at the end.
+	// %v for rune values gives you unicode values of characters.
+	// emojis are supported in golang.
+	// runes are int32, unlike 8bit in c.
+}

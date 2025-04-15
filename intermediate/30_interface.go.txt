@@ -1,0 +1,67 @@
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+type geometry interface { // interface
+	area() float64
+	perim() float64
+}
+
+type rect struct {
+	width, height float64
+}
+
+type circle struct{
+	radius float64
+}
+
+func (r rect) area() float64 {//Implements interface
+	return r.height * r.width
+}
+
+func (c circle) area() float64 {//Implements interface
+	return math.Pi* c.radius * c.radius
+}
+
+func (r rect) perim() float64 {//Implements interface
+	return (r.height + r.width) * 2
+}
+
+func (c circle) perim() float64 {//Implements interface
+	return 2 * math.Pi* c.radius
+}
+
+func (c circle) diameter() float64 {// additional method
+	return 2 * c.radius
+}
+
+func measure (g geometry) {// adds method to interface implementations
+	fmt.Println(g)
+	fmt.Println(g.area())
+	fmt.Println(g.perim())
+}
+
+// lower case if you're not exporting.
+// To export just have upper case for methods, interfaces etc.
+// Modules are camelCase.
+
+func main() {
+	r := rect{ width: 3, height: 4}
+	c := circle{ radius: 5}
+
+	measure(r)
+	measure(c)
+}
+
+// any is an alias for interface
+// interface is a type, that allows 
+// acceptance whereever the interface is accepted.
+
+func myPrinter (i ...interface{}){// accepts any type of value.
+ for _, v:= range i {
+	fmt.Println(v);
+ }
+}

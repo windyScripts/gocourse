@@ -1,0 +1,84 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main () {
+
+	// Print functions
+	fmt.Print(1)
+	fmt.Print(2)
+	fmt.Print(3)
+
+	fmt.Println(1)
+	fmt.Println(2)
+	fmt.Println(3)
+
+	name:= "John"
+	age:= 25
+
+	fmt.Printf("Name: %s \n%d", name,age)
+	fmt.Printf("Binary: %b, Hex; n%X\n ",age,age)
+
+	//formatting functions: returns formatted strings.
+
+	s := fmt.Sprint("Hello", "World", 123,456)
+	fmt.Println(s)
+
+	s1:= fmt.Sprintln("Hello", "World", 123,456)
+	fmt.Println(s1)
+
+	s2:= fmt.Sprintf("Name: %s, Age: %d",name,age)
+	fmt.Print(s2)
+
+	// Scanning functions
+	var name1 string
+	var age1 int
+
+		// blanks are ignored, pause for input continues.
+
+	fmt.Print("Enter name and age")
+	fmt.Scan(&name1,&age1)
+	fmt.Printf("Name: %s, Age: %d", name1,age1)
+
+	// scanln stops scanning at newline, 
+	// and requires one item per input.
+
+
+	var name2 string
+	var age2 int
+
+	fmt.Print("Enter name and age")
+	fmt.Scanln(&name2,&age2)
+	fmt.Printf("Name: %s, Age: %d", name2,age2)
+	// name is applied, age is given zero value.
+
+	var name3 string
+	var age3 int
+
+	fmt.Print("Enter name and age")
+	fmt.Scanf("%s %d",&name3,&age3) // expects input in 
+	// the same format as in the double quotes.
+	fmt.Printf("Name: %s, Age: %d", name3,age3)
+	// name is applied, age is given zero value.
+
+	// Error formatting functions
+
+	err:= checkAge(15)
+	if err != nil {
+		fmt.Println("Error", err)
+	}
+
+	
+
+}
+
+func checkAge(age int) error {
+if age<18 {
+	return fmt.Errorf("Age %d is too young to drive", age)
+} 
+return nil
+}
+
+// error is an interface, and has default value as nil.

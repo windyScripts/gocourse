@@ -1,0 +1,105 @@
+package main
+
+import "fmt"
+
+func main() {
+	/* 
+	%v prints value in default format
+	%V prints value in go-syntax format
+	%T prints type of value
+	%% prints the percentage sign
+
+
+	*/
+
+	i := 15.5
+	string := "Hello World!"
+
+	fmt.Printf("%v\n",i)
+	fmt.Printf("%#v\n",i)
+	fmt.Printf("%T\n",i)
+	fmt.Printf("%v%%\n\n",i)
+
+	fmt.Printf("%v\n",string)
+	fmt.Printf("%#v\n",string)
+	fmt.Printf("%T\n\n",string)
+
+// underscores can be used to improve readability of numbers
+
+
+
+
+	/*
+	%b base 2
+	%d base 10
+	%+d base 10, aways show sign
+	%o base 8
+	%O base 8 with leading 0o
+	%x base 16 lowercase
+	%X base 16 uppercase
+	%#x base 16 with leading 0x
+	%4d pad with spaces ( width 4 right justified)
+	%-4d pad with spaces (width 4 left justified)
+	%04d Pad with zeroes (width 4)
+
+	*/
+
+	int := 255
+
+	fmt.Printf("%b\n",int)
+	fmt.Printf("%d\n",int)
+	fmt.Printf("%+d\n",int)
+	fmt.Printf("%o\n",int)
+	fmt.Printf("%O\n",int)
+	fmt.Printf("%x\n",int)
+	fmt.Printf("%X\n",int)
+	fmt.Printf("%#x\n",int)
+	fmt.Printf("%4d\n",int)
+	fmt.Printf("%-4d\n",int)
+	fmt.Printf("%04d\n",int)
+
+/* 
+%s Plain string
+%q double quoted string
+%8s Prints value as plain string (width 8, right justified)
+%-8s plain string (width 8 left justified)
+%x prints the value as hex dump of byte values
+% x prints the value as hex dump with spaces
+*/
+
+txt := "World"
+
+fmt.Printf("%s\n", txt)
+fmt.Printf("%q\n", txt)
+fmt.Printf("%8s\n", txt)
+fmt.Printf("%-8s\n", txt)
+fmt.Printf("%x\n", txt)
+fmt.Printf("% x\n\n", txt)
+
+/* 
+ %t value of boolean in true or false format (same as %v)
+*/
+
+t := true
+f := false
+fmt.Printf("%t\n", t)
+fmt.Printf("%t\n\n", f)
+
+/* 
+%e scientific notation with e as exponent
+%f decimal point, no exponent
+%.2f default width, precision 2
+%6.2f width 6, precision 2
+%g Exponent as needed, only necessary digits
+*/
+
+flt := 918.00
+
+fmt.Printf("%e\n", flt)
+fmt.Printf("%f\n", flt)
+fmt.Printf("%.2f\n", flt)
+fmt.Printf("%6.2f\n", flt)
+fmt.Printf("%g\n", flt)
+
+}
+

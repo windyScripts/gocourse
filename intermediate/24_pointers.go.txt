@@ -1,0 +1,32 @@
+package main
+
+import "fmt"
+
+func main () {
+ // var ptr *int
+ var ptr *int
+ var a int = 10
+ ptr = &a
+ fmt.Println(a, ptr) // value and memory address
+
+ // getting value
+ fmt.Println(*ptr)
+
+// zero value of pointer is nil.
+// pointer arithmetic not supported
+// by go.
+
+// referencing and dereferencing supported.
+
+modifyValue(ptr) // increments ptr value.
+fmt.Println(*ptr)
+
+}
+// int float string ...
+
+func modifyValue(ptr *int){
+*ptr++
+
+// Pointers can be used to access
+// the original values of structs.
+}

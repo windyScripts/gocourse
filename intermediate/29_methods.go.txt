@@ -1,0 +1,54 @@
+package main
+
+import (
+	"fmt"
+)
+
+type Rectangle struct {
+	length float64
+	width float64
+}
+
+func (r Rectangle) Area() float64 {// value receiver
+return r.length * r.width
+}
+
+func (r *Rectangle) Scale(factor float64) {// pointer receiver
+	r.length *= factor
+	r.width *= factor
+}
+
+func main() {
+
+	rect := Rectangle{length: 10, width:9}
+	area := rect.Area()
+	fmt.Println("Area of rectangle is",area)
+	rect.Scale(2)
+	area = rect.Area()
+	fmt.Println("Area of scaled rectangle is",area)
+
+	num := MyInt(-1)
+	num1 := MyInt(5)
+	fmt.Println(num.IsPositive())
+	fmt.Println(num1.IsPositive())
+	fmt.Println(num.welcomeMessage())
+
+	s:= Shape{Rectangle: Rectangle{length :10, width: 9}}
+	fmt.Println(s.Area()); // promotion of properties.
+}
+
+type MyInt int
+// method on user defined type
+
+func (m MyInt) IsPositive() bool {
+	return m > 0
+}
+
+func (MyInt) welcomeMessage() string {
+	return "Welcome to MyInt Type"
+}
+
+type Shape struct {
+	Rectangle
+}
+

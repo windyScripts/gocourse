@@ -1,0 +1,76 @@
+package main
+
+import (
+	"fmt"
+)
+
+func main() {
+	
+	// Structs should be defined outside main function so 
+	// it doesn't error on method creation.
+	// can create instances of structs
+	p:= Person{
+		firstName: "John",
+		lastName: "Doe",
+		age:26,
+		PhoneHomeCell: PhoneHomeCell{
+			home:"123",
+			cell:"234", // this can be directly referred to as p1.cell
+					},
+	}
+
+	// missing variables will be replaced by zero values.
+
+	p1:= Person {
+		firstName: "Jane",
+		age: 25,
+	}
+
+	// dot notation to get values
+
+	fmt.Println(p.firstName)
+	fmt.Println(p1.lastName)
+
+	// anonymous structs exist
+
+	user := struct {
+		username string
+		email string
+	} {
+		username: "user123",
+		email: "pseudoemail@example.org",
+	}
+
+	fmt.Println(user)
+
+	fmt.Println(p.fullName())
+
+	fmt.Println(p1.fullName())
+	fmt.Println(p1.age)
+	p1.incrementAgeBy1()
+	fmt.Println(p1.age)
+
+}
+
+type Person struct {
+	firstName string
+	lastName string
+	age int
+	PhoneHomeCell
+}
+
+type PhoneHomeCell struct {
+	home string
+	cell string
+}
+
+// methods are defined outside structs
+func (p Person) fullName() string{
+	return p.firstName + " " + p.lastName
+}
+
+func (p *Person) incrementAgeBy1(){
+p.age++;
+}
+
+//
