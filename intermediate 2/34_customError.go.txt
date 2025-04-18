@@ -1,0 +1,67 @@
+package main
+
+import (
+	"errors"
+	"fmt"
+)
+
+func main() {
+
+	// commented to allow wrapped error to run.
+	// err := doSomething()
+	// if err != nil {
+	// 	fmt.Println(err)
+	// 	return
+	// }
+	// fmt.Println("Operation completed successfully.")
+
+	err1 := doSomething1()
+	if err1 != nil {
+		fmt.Println(err1)
+		return
+	}
+	fmt.Println("Operation completed successfully.")
+}
+
+type customError struct {
+	code int
+	message string
+}
+
+// Error returns the error message. Implementing Error() method of  error interface
+func (e *customError) Error() string{
+	return fmt.Sprintf("Error %d: %s",e.code,e.message)
+}
+
+// function that returns a custom errr
+func doSomething() error {
+	return &customError{code: 500, message: "Something went wrong!"}
+}
+
+// go version 1.13 wrapped errors: %w
+
+type customError1 struct {
+	code int
+	message string
+	err	error
+}
+
+func (e *customError1) Error() string{
+	return fmt.Sprintf("Error %d: %s %v\n",e.code,e.message,e.err)
+}
+
+func doSomethingElse() error {
+	return errors.New("Internal error")
+}
+
+func doSomething1() error {
+	err:= doSomethingElse()
+	if(err != nil){
+		return &customError1{
+			code: 500,
+			message: "Something went wrong",
+			err:err,
+		}
+	}
+	return nil
+}
