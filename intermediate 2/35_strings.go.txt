@@ -1,0 +1,86 @@
+package main
+
+import (
+	"fmt"
+	"regexp"
+	"strconv"
+	"strings"
+	"unicode/utf8"
+)
+
+func main() {
+	str := "Hello Go!"
+	fmt.Println(len(str))
+
+	str1 := "Hello"
+	str2 := "World!"
+	result := str1+" "+str2
+	fmt.Println(result)
+
+	// non new topics covered:
+	// concatenation
+	// runes as single characters and 
+	// square bracket access notation
+	// ASCII value returned with printLn, 
+	// string conversion with strconv.
+	num := 66
+	str3:= strconv.Itoa(num)
+	fmt.Printf("%s\n",str3) // doesn't work?
+	fruits := "apple, orange, banana"
+	parts := strings.Split(fruits,", ")
+	fmt.Println(parts)
+
+	countries := []string{"Germany", "France", "UK"}
+	joined := strings.Join(countries,", ")
+	fmt.Println(joined) // only adds between, not at end.
+
+	fmt.Println(strings.Contains(str,"Go")) // true
+	fmt.Println(strings.Contains(str,"Go?"))// false
+	
+	replaced:= strings.Replace(str,"Go","World",1)
+	fmt.Println(replaced)
+
+	strWithSpace:= "   Hello Everyone!"
+	fmt.Println(strings.TrimSpace(strWithSpace))
+	fmt.Println(strings.ToLower(strWithSpace))
+	fmt.Println(strings.ToUpper(strWithSpace))
+
+	fmt.Println(strings.Repeat("foo",3))
+
+	fmt.Println(strings.Count("Hello","He"))
+	fmt.Println(strings.HasPrefix("Hello","He")) //t
+	fmt.Println(strings.HasPrefix("Hello","he")) //f
+	fmt.Println(strings.HasSuffix("Hello","lo")) //t
+	fmt.Println(strings.HasSuffix("Hello","la")) //f
+
+	// regex
+	str5:= "Hello, 123 Go 11!"
+	re:= regexp.MustCompile(`\d+`)
+	matches := re.FindAllString(str5,-1) // all matches with -1, 
+	// returns array of strings
+	fmt.Println(matches)
+	str6 := "Hello, 世界"
+	fmt.Println(utf8.RuneCountInString(str6))//8
+	// strings.Builder allows efficient, incremental
+	// concatenation of strings.
+	// better than Sprintf as well.
+
+	var builder strings.Builder
+	builder.WriteString("Hello")
+	builder.WriteString(", ")
+	builder.WriteString("World!")
+
+	// convert builder to string
+	result1 := builder.String()
+	fmt.Println(result1)
+	
+	builder.WriteRune(' ')
+	builder.WriteString("How are you")
+	result2 := builder.String()
+	fmt.Println(result2)
+
+	// reset the builder
+	builder.Reset()
+	builder.WriteString("Starting Fresh!")
+	fmt.Println(builder.String())
+}
