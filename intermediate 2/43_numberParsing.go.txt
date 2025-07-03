@@ -1,0 +1,40 @@
+package main
+
+import (
+	"fmt"
+	"strconv"
+)
+
+func main(){
+	numStr := "12345"
+	num, err :=strconv.Atoi(numStr)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(num)
+	numistr, err2 := strconv.ParseInt(numStr, 10, 32)
+		if err2 != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(numistr)
+
+	floatstr := "3.14"
+	floatval, err3 := strconv.ParseFloat(floatstr, 64)
+		if err3 != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(floatval)
+	fmt.Printf("%f\n", floatval)
+
+	binaryStr := "1010"
+	decimal, err5 := strconv.ParseInt(binaryStr,2,64)
+		if err5 != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(decimal)
+}
+
+// converting textual representation of numbers into number values.
+// strconv
+// 9:58
+

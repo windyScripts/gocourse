@@ -1,0 +1,55 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main(){
+	// Current local time
+	now := time.Now()
+	fmt.Println(now)
+
+	// specific time
+	specificTime := time.Date(2024, time.July, 30, 14, 0,0,0, time.UTC)
+	fmt.Println(specificTime)
+
+	//parse time
+	parsedTime, _ := time.Parse("2006-01-02","2020-05-01") // Mon Jan 2 15:04:05 MST 2006 -> Note this value, it's a constant. You cannot change the digits.
+	parsedTime1, _ := time.Parse("06-01-02", "20-05-01") // Mon Jan 2 15:04:05 MST 2006
+	parsedTime2, _ := time.Parse("06-01-02 15-04", "20-05-01 18-05") // Mon Jan 2 15:04:05 MST 2006
+	fmt.Println(parsedTime)
+	fmt.Println(parsedTime1)
+	// note that this will not work: parsedTime1, _ := time.Parse("6-1-2", "20-5-1") as there is a mismatch in number of digits.
+	fmt.Println(parsedTime2) 
+
+	// formatting time:
+	t := time.Now()
+	fmt.Println("Formatted time:", t.Format("06-01-02 04-15")) // Mon Jan 2 15:04:05 MST 2006
+
+	oneDayLater := t.Add(time.Hour*24)
+	fmt.Println(oneDayLater)
+	fmt.Println(oneDayLater.Weekday())
+
+	fmt.Println("Rounded Time:", t.Round(time.Hour)) // Rounded for UTC
+
+	loc, _ := time.LoadLocation("Asia/Kolkata")
+	t = time.Date(2024, time.July, 8, 14,16, 40, 00, time.UTC)
+
+	// convert to specific timezone.
+	tLocal := t.In(loc)
+	fmt.Println(tLocal)
+
+	roundedTime := t.Round(time.Hour)
+	roundedTimeLocal := roundedTime.In(loc)
+
+	fmt.Println(roundedTime, roundedTimeLocal)
+
+	fmt.Println("truncated time:", t.Truncate(time.Hour)) // truncate rounds down time. Round can round up.
+
+	t1 := time.Date(2024, time.July, 4,12, 0,0,0, time.UTC)
+	t2 := time.Date(2024, time.July, 4,18, 0,0,0, time.UTC)
+	duration := t2.Sub(t1)
+	fmt.Println("DURATION:",duration)
+	
+}

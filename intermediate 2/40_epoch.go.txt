@@ -1,0 +1,19 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main(){
+
+	// 1970 Jan 1.
+	// seconds or milliseconds since epoch is how time is measured.
+
+	// unix time does not account for leap seconds.
+	// 
+
+	fmt.Println(time.Now().Unix())
+	
+
+}

@@ -1,0 +1,20 @@
+package main
+
+import (
+	"fmt"
+	"math/rand"
+)
+
+func main(){
+fmt.Println(rand.Intn(101))
+
+val := rand.New(rand.NewSource(42)) // fixing the seed
+fmt.Println(val.Intn(101))
+}
+
+// PRNG Pseudo random number generator
+// True random numbers are generated from physical sources like radioactive decay.
+// Seeding is automatic.
+// rand.Float64() returns a number between 0.0 and 1.0, half open.
+
+// incomplete, not doing the dice project
