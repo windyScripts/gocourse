@@ -1,0 +1,30 @@
+// encoding
+
+// binary -> textual format of 64 characters: uppercase, lowercase, 0-9, )/= signs
+
+package main
+
+import (
+	"encoding/base64"
+	"fmt"
+)
+
+func main() {
+
+	//encode to b64
+	data:= []byte("hello, base 64 encoding")
+	encoded := base64.StdEncoding.EncodeToString(data)
+	fmt.Println(encoded)
+
+	// decode from b64
+	decoded, err := base64.StdEncoding.DecodeString((encoded))
+	if err != nil {
+		fmt.Println("Error decoding", err)
+	}
+	fmt.Println("byte slice is",decoded)
+		fmt.Println("string is",string(decoded))
+
+		// url safe encoding: avoid /, +
+		urlSafeEncoded := base64.URLEncoding.EncodeToString(data)
+		fmt.Println("URL safe encoded:", urlSafeEncoded)
+}

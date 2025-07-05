@@ -1,0 +1,65 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
+func main(){
+	//os.Create("49output.txt")
+	//file, err := os.Open("49output.txt") // Open only opens for reading by default.
+	file, err := os.OpenFile("49output.txt",os.O_RDWR,os.ModeAppend)
+	if err != nil {
+		fmt.Println("Error opening file", err)
+	}
+	defer func() {
+		fmt.Println("Closing open file")
+		file.Close()
+	}() //iife
+	fmt.Println("File opened successfully")
+
+	// write to file:
+
+	writeData := []byte("This is stuff written to the file!\n\n\nOne more line!")
+
+	n, err1 := file.Write(writeData)
+		if err1 != nil {
+		fmt.Println("Error while writing to file:",err1)
+		return
+	}
+
+	fmt.Println("File written successfully",n)
+
+	//read contents of open file.
+
+	file2,err2 := os.Open("49output.txt")
+	if err2 != nil {
+		fmt.Println("Error opening file2", err2)
+	}
+		defer func() {
+		fmt.Println("Closing open file")
+		file2.Close()
+	}() //iife
+	// data := make([]byte,1024)
+	// _, err = file2.Read(data)
+	// if err != nil {
+	// 	fmt.Println("Error reading from file2, ",err)
+	// 	return
+	// }
+	// fmt.Println("File content:", string(data))
+
+	scanner := bufio.NewScanner(file2) // note that uncommenting the above lines will render this unfunctional as file will have already been read.
+
+	for scanner.Scan(){
+		line := scanner.Text()
+		fmt.Println("Line:", line)
+	}
+
+	err3:= scanner.Err()
+	if err3!= nil{
+		fmt.Println("Error reading:",err3)
+		return
+	}
+	// eof is io.EOF in go.
+}

@@ -1,0 +1,66 @@
+// buffered input/ output
+// bufio.Reader: a struct wrapped around io.reader
+// bufio.Writer
+// ReadString, delimiter character. We do not limit by bytes.
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main() {
+
+	reader := bufio.NewReader(strings.NewReader("Hello, bufio package!\n")) // bufio.NewReader accepts other readers as input.
+	// strings.NewReader returns a reader object
+	// reader object is an interface that allows you to read.
+	// bufio.Reader object returned, buffering data, and more methods to parse data.
+	// Reading byte slice
+	data := make([]byte, 20) // slice of 20 bytes
+	n, err := reader.Read(data) // reads bytes into data, returns number of bytes and error.
+	if err != nil {
+		fmt.Println("Error reading", err)
+	}
+	fmt.Printf("Read %d bytes: %s\n", n, data[:n])
+
+	line, err1 := reader.ReadString('\n')
+	if err1 != nil {
+		fmt.Println("Error reading string", err1)
+	}
+	fmt.Println("read string:", line)
+
+	//bufio writer is a struct wrapping around io.writer
+	// write is limited by bytes, writeString writes a whole string.
+
+	writer := bufio.NewWriter(os.Stdout)
+	// os.Stdout is a writer.
+
+	// Writing byte slice:
+	data1 := []byte("Hello, bufio package!\n")
+
+	n2, err2 :=writer.Write(data1)
+	if err2 != nil {
+		fmt.Println("Error writing", err2)
+	}
+	fmt.Printf("Wrote %d bytes\n",n2)
+	// flush the buffer to ensure all data is written to os.Stdout
+	err3 := writer.Flush()
+	if err3 != nil {
+		fmt.Println("Error flushing writer", err3)
+	}
+
+	// Writing string
+	str := "This is a string.\n"
+	n3, err4 := writer.WriteString(str)
+	if err4 != nil {
+		fmt.Println("Error writing string", err4)
+	}
+	fmt.Printf("%d bytes written\n",n3)
+
+	err5 := writer.Flush()
+	if err5 != nil {
+		fmt.Println("Error flushing writer", err5)
+	}
+}

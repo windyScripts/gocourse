@@ -1,0 +1,79 @@
+package main
+
+import (
+	"crypto/rand"
+	"crypto/sha256"
+	"crypto/sha512"
+	"encoding/base64"
+	"fmt"
+	"io"
+)
+
+// hashing is used to onvert data into a fixed size string
+
+func main() {
+	//SHA 256 256 bit or 32 byte hash
+	// SHA 512 512 bit or 64 byte hash
+
+	// hashing is one way, generally not reversible.
+	// efficient
+
+	// good practices: use of standard libraries, algo updates.
+
+	// information is lost, good hashing avoids collisions.
+	password := "password123"
+
+	hash256 := sha256.Sum256([]byte(password))
+	hash512 := sha512.Sum512([]byte(password))
+	fmt.Println(password)
+	fmt.Println("256:",hash256)
+	fmt.Printf("SHA-256 Has hex val: %x\n", hash256)
+		fmt.Println("512:",hash512)
+	fmt.Printf("SHA-512 Has hex val: %x\n", hash512)
+
+	// salting: adds extra layer of security by adding a random value, protects against dictionary attacks and rainbow value attacks
+	salt, err := generateSalt()
+	fmt.Printf("Original salt: %x\n",salt)
+	if err!= nil {
+		fmt.Println("Error generating salt", err)
+	}
+	signupHash := hashPassword(password,salt)
+
+	// Store salt and password, or for now just print
+	saltStr := base64.StdEncoding.EncodeToString(salt)
+	fmt.Println("Salt:", saltStr) // encoding for safety
+	fmt.Println("hashed password:",signupHash)
+
+	// vefify
+	// retrieve the saltStr and decode it
+	decodedSalt, err := base64.StdEncoding.DecodeString(saltStr)
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	loginHash := hashPassword(password, decodedSalt)
+
+	// compare stored hash with new hash
+	if signupHash == loginHash {
+		fmt.Println("Password correct, you are logged in.")
+	} else {
+		fmt.Println("login failed. Please check credentials.")
+	}
+}
+
+func generateSalt() ([]byte, error){
+	salt := make([]byte, 16)
+	_, err := io.ReadFull(rand.Reader, salt) // generates crypto secure random numbers, saves in salt
+	if err != nil {
+		return nil, err
+	}
+	return salt, nil
+}
+
+func hashPassword (password string, salt []byte) string {
+	saltedPassword := append(salt, []byte(password)...)
+	hash := sha256.Sum256(saltedPassword)
+	return base64.StdEncoding.EncodeToString((hash[:]))
+}
+
+// note that cryptographical random numbers are distinct from random numbers.
+

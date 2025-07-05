@@ -1,0 +1,43 @@
+package main
+
+import (
+	"fmt"
+	"os"
+)
+
+func main(){
+
+	file, err := os.Create("48output.txt")
+	if err != nil {
+		fmt.Println("Error while creating file:",err)
+		return
+	}
+	defer file.Close() // closes file after all actions took place.
+	data := []byte("Hello World!\n")
+	_, err = file.Write(data)
+		if err != nil {
+		fmt.Println("Error while writing to file:",err)
+		return
+	}
+
+	fmt.Println("File written successfully")
+
+	file, err = os.Create("48writeString.txt")
+	if err != nil {
+		fmt.Println("error creating file", err)
+		return
+	}
+	defer file.Close()
+	_, err = file.WriteString("Hello Go\n")
+	if err != nil {
+		fmt.Println("error writing string to file", err)
+	}
+	fmt.Println("Writing to 48String.txt complete.")
+}
+
+// Create for creating file
+// OpenFile
+// Write
+// WriteString
+
+//Best practices: error handling, deferred closing, permissions, buffering.
