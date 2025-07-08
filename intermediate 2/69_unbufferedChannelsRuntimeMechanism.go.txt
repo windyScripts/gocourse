@@ -1,0 +1,33 @@
+package main
+
+import "fmt"
+
+func main(){
+
+ch := make(chan int)
+
+// ch <- 1
+go func () {
+ch <- 1
+
+// receiver := <- ch
+// fmt.Println(receiver)
+}()
+
+
+receiver := <- ch
+fmt.Println(receiver)
+
+}
+
+// buffered channel: channel with storage
+// difference from unbuffered channels is that
+// buffered channels allow async till buffer is full
+// handles bursts of data without sync
+// rate of data transfer can be controlled.
+// channel requires an immediate receiver. 
+// Thus you can't pass the output to a 
+// channel into a goroutine from main
+// receiver will wait for all go 
+// routines to end and then throw an error.
+// Even if the goroutines are not related.

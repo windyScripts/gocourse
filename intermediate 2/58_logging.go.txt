@@ -1,0 +1,26 @@
+package main
+
+import "log"
+
+func main(){
+	log.Println("This is a log message.")
+
+	log.SetPrefix("INFO: ")
+	log.Println("This is an info message")
+
+	// Log Flags
+	log.SetFlags(log.Ldate | log.Ltime)
+
+	// log.L_ is useful for adding information to logging.
+
+	log.Println("This is a log message with date and time.")
+
+
+}
+
+var (
+	infoLogger := log.New(os.Stdout, "INFO: ", )
+)
+
+// debug, info, warn, error not available in printLn.
+

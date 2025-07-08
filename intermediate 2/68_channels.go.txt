@@ -1,0 +1,54 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main(){
+greeting := make(chan string)
+greetString:="Hello"
+
+go func() {
+greeting <- greetString
+greeting <- "World"
+
+// Attempting something slightly more complex:
+for _, e := range "abcde" {
+	greeting <- "Alphabet: "+string(e)
+}
+}()
+
+// go func() {
+// 	receiver := <- greeting
+// fmt.Println(receiver)
+// receiver = <- greeting
+// fmt.Println(receiver)
+// }()
+
+receiver := <- greeting
+fmt.Println(receiver)
+receiver = <- greeting
+fmt.Println(receiver)
+
+for range 5 {
+	rcvr := <- greeting
+	fmt.Println(rcvr)
+}
+
+time.Sleep(1 * time.Second)
+fmt.Println("EOP")
+}
+
+// channels allow data transfer between go routines
+
+// variable := make(chan type)
+
+// channels do not work inside functions. You need to use goroutines.
+// channels are blocking, goroutines are non blocking.
+// main is also considered a go routine.
+
+// On sending a second instance, we have to reexecute receiver = <- greeting.
+
+// main has to wait one way or another for goRoutines to execute.
+

@@ -1,0 +1,56 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+// lightweight threads used for concurrency. (Or parallel)
+// efficiently handle parallel tasks such as I/O, calculations etc
+// allows concurrency without manually managing threads.
+func main(){
+
+		go sayHello() // go routine call
+					  // No logs since the main function is cleared before the goroutine can be run.
+
+					  // ways to wait for goroutine to complete:
+		time.Sleep(2 * time.Second)
+
+}
+
+func sayHello(){
+	time.Sleep(1* time.Second)
+	fmt.Println("Hello")
+} 
+
+
+// Goroutine scheduling in Go
+// - Managed by Go Runtime Scheduler
+// - Uses M:N Scheduling Model: M goroutines on N OS threads.
+// Efficient Multiplexing // or switcing
+
+//Best Practices
+// Avoid goroutine leaks
+// Limit goroutine creation
+// Proper error handling
+// sync
+
+// Goroutines are just functions that 
+// leave the main thread and run in the 
+// background and come back to join the 
+// main thread once the functions are 
+// finished/ready to return any value.
+
+// go routines do not stop the program flow
+// and are non blocking.
+
+// go routines causr n+2 
+// do not expect a specific order when using goroutines.
+
+// concurrency vs parallelism
+// goroutines cannot return values directly.
+
+// go func() {
+// 	err = doWork()
+// }
+// This works.

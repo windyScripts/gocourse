@@ -1,0 +1,48 @@
+package main
+
+import (
+	"fmt"
+	"path/filepath"
+	"strings"
+)
+
+func main(){
+	// go file package handles forward and backslashes seamlessly for unix and windows.
+	// filepath. Join Split Clean Abs Base Dir
+	// os Mkdir, MkdirAll
+	relativePath := "./51/file.txt"
+	absolutePath := "/home/aravindushenoy/code/gocourse/51/absolute.txt"
+
+	// join paths. using filepath.join
+	joinedPath := filepath.Join("home","Documents","downloads", "file.zip")
+	fmt.Println("JoinedPath",joinedPath)
+
+	normalizedPath := filepath.Clean("./data/../data/file.txt")
+	fmt.Println(normalizedPath)
+
+	dir, file := filepath.Split("/home/user/docs/file.txt")
+	fmt.Println("File:",file)
+	fmt.Println("Directory:",dir)
+	fmt.Println(filepath.Base("/home/user/docs/file.txt")) // can be directory or filename.
+
+	fmt.Println("Is relative path absolute?",filepath.IsAbs(relativePath))
+	fmt.Println("Is absolute path absolute?",filepath.IsAbs(absolutePath))
+
+	fmt.Println("Extension of file.txt is:",filepath.Ext(file))
+	fmt.Println("Name of file.txt without extension is", strings.TrimSuffix(file, filepath.Ext(file)))
+
+	rel, err := filepath.Rel("a/b","a/b/t/file")
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println(rel)
+
+		rel1, err1 := filepath.Rel("a/c","a/b/t/file")
+	if err1 != nil {
+		panic(err1)
+	}
+	fmt.Println(rel1)
+
+}
+
+// Stopped at 18:57, I can figure out most of this stuff for now. Will come back if necessary.

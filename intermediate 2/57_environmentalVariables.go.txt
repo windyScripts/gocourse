@@ -1,0 +1,44 @@
+package main
+
+import (
+	"fmt"
+	"os"
+	"strings"
+)
+
+func main(){
+	// env variables are accessed through os.'
+	user := os.Getenv("USER")
+	home := os.Getenv("HOME")
+	
+	fmt.Println("User env var:", user)
+	fmt.Println("Home env var:", home)
+
+	err := os.Setenv("FRUIT", "APPLE")
+	if err != nil {
+		fmt.Println("Error in setting environment", err)
+	}
+
+	for _, e := range os.Environ(){
+		kvpair := strings.SplitN(e, "=", 2)
+
+		// n = 1 returns (a=b=c=c)
+		// n = 2 returns "a" and "b=c=d"
+		// n = 3 returns "a", "b", "c=d"
+		// n = 4 returns "a" and "b" and "c" and "d"
+
+		fmt.Println(kvpair[0])
+	}
+	err = os.Unsetenv("FRUIT")
+	if err != nil {
+		fmt.Println("Error unsetting env var:", err)
+		return
+	}
+	fmt.Println("Unset done on FRUIT.")
+
+
+
+		// use index one to get all values.
+	
+
+}

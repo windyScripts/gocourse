@@ -1,0 +1,47 @@
+package main
+
+import (
+	//_ embed
+	"embed"
+	"fmt"
+	"io/fs"
+	"log"
+)
+
+//go:embed 54embedFile.txt
+var content string
+
+//go:embed basics
+var basicsFolder embed.FS
+
+func main(){
+	// v 1.16 embed directive adds files/directories into go binaries at build time.
+	// comment that golang notes and doesn't get rid of.
+
+	fmt.Println("Embedded content:", content)
+	content, err:= basicsFolder.ReadFile("basics/1hello.go.txt")
+	if err != nil {
+		fmt.Println("Error reading file", err)
+		return
+	}
+
+	fmt.Println("Embedded file content:", string(content))
+
+	err = fs.WalkDir(basicsFolder, "basics", func(path string, d fs.DirEntry, err error)error{
+		if err != nil {
+			fmt.Println(err)
+			return err;
+		}
+		fmt.Println(path)
+		return nil
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+
+}
+
+// os.dirEntry for os, fs.dirEntry for more general file systems.
+
+// when importing a package only for side effects, we use _ "package name". This is called a blank import
+// embedded files cannot be modified at runtime, may require rebuild to update.
