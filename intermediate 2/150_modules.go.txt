@@ -1,0 +1,18 @@
+package main
+
+func main(){
+
+}
+
+// A package is the smallest unit of code organization in go.
+// It groups together related go files that typically contain functions,
+// types and variables.
+// Every go file belongs to a package and each 
+// package can be imported and used in another package.
+// packages package go files into reusable components. Promotes code reuse.
+// Modules manage dependencies across packages.
+// versioning is managed by modules.
+// packages are always part of modules, even if part of the standard library
+// packages are not naturally versioned.
+
+

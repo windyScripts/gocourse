@@ -1,0 +1,35 @@
+package main
+
+import (
+	"fmt"
+	"log"
+	"net/http"
+)
+
+func main() {
+
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request){
+		fmt.Fprintln(w, "Hello Server!") //writes to w.
+	})
+
+
+	//const serverAddr string = "127.0.0.1:3000"
+	const port string = ":3000" // assumes localhost.
+	// receives requests, sends responses.
+	err := http.ListenAndServe(/* serverAddr */port, nil)
+	if err != nil {
+		log.Fatalln("error starting server", err)
+		// 65535 ports in total.
+	}
+	
+}
+
+// define http handlers, functions that handle endpoints.
+//1024 - 49151 are registered ports, allocated to applications.
+// 0-1023 are well known ports.
+// ports are a communication mechanism.
+
+// 148 postman installation
+// 149 go does better than 
+// node, express and fastify, 
+// though fastify is pretty good.

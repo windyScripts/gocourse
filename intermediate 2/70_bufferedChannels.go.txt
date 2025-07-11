@@ -1,0 +1,44 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+/* func main (){
+	// Blocking on RECEIVE only if buffer is empty.
+	ch := make(chan int,2)
+	go func(){
+		time.Sleep(2*time.Second)
+		ch <- 1
+	}()
+	fmt.Println("value", <-ch)
+	fmt.Println("EOP")
+} */
+
+// Blocking on SEND only if buffer is full.
+func main(){
+// make(chan Type, capacity)
+ch := make(chan int, 2)
+ch <- 1
+ch <- 2
+fmt.Println("Receivng fro buffer")
+go func(){
+	time.Sleep(2*time.Second)
+	fmt.Println("Received", <-ch)
+}()
+ch <- 3 // Blocks because buffer is full.
+//fmt.Println("value",<-ch)
+//fmt.Println("value",<-ch)
+}
+
+// in a line, execution happens from right to left.
+
+// allows holding limited number of values
+// will only block when buffer is full.
+// useful for flow control, outward flow of data
+// from channel.
+// deadlock means there's no room left 
+// in the buffer for data.
+
+// overbuffering can hide issues with data flow and design.

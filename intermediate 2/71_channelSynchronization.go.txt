@@ -1,0 +1,68 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+/* func main(){
+done := make(chan struct{})
+
+go func(){
+	fmt.Println("Working...")
+	time.Sleep(2*time.Second)
+	done <- struct{}{}
+}()
+
+<-done
+fmt.Println("Finished.")
+}
+
+*/
+
+/*  func main(){
+	ch := make(chan int)
+	go func(){
+		ch <- 9
+		time.Sleep(time.Second)
+		fmt.Println("Sent value")
+	}()
+	value:= <- ch
+	fmt.Println(value)
+ } */
+
+/* func main(){
+	numGoRoutines := 3;
+	done := make(chan int,3)
+
+	for i := range numGoRoutines {
+		go func(id int){
+			fmt.Printf("Goroutine %d",id)
+			time.Sleep(time.Second)
+		}(i)
+	}
+
+	for range numGoRoutines {
+		<- done // wait for each goroutine to finish.
+	}
+
+	fmt.Println("All goroutines are complete.")
+ }
+
+ // when you have n sender goroutines, ensure you have n receivers. */
+
+ func main(){
+	data := make(chan string)
+
+	go func(){
+		for i := range 5{
+			data <- "hello " + string('0'+i)
+			time.Sleep(100*time.Millisecond)
+		}
+		close(data) // Tells the receiver that there are no more values, and thus prevents the deadlock error.
+	}()
+
+	for value := range data {
+		fmt.Println("Received value:", value, ":", time.Now())
+	} // This is still a receiver.
+ }
